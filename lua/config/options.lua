@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.g.snacks_animate = false
 vim.api.nvim_set_keymap('n', '<leader>h', ':Dashboard<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>yf", ":let @+ = expand('%:p')<CR>", { desc = "Yank Filepath" })
