@@ -12,6 +12,7 @@ vim.keymap.set("n", "<leader>yf", ":let @+ = expand('%:p')<CR>", { desc = "Yank 
 
 -- ~~~~~~~~~~~~~~~ Editing ~~~~~~~~~~~~~~~~~
 vim.g.autoformat = false
+vim.opt.clipboard = "unnamedplus"
 
 
 -- ~~~~~~~~~~~~~~~~ Git ~~~~~~~~~~~~~~~~~~~~
