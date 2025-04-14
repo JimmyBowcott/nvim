@@ -14,6 +14,12 @@ vim.keymap.set("n", "<leader>yf", ":let @+ = expand('%:p')<CR>", { desc = "Yank 
 vim.g.autoformat = false
 vim.opt.clipboard = "unnamedplus"
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    vim.diagnostic.setloclist({ open = false })
+    vim.lsp.buf.format({ async = true })
+  end,
+})
 
 -- ~~~~~~~~~~~~~~~~ Git ~~~~~~~~~~~~~~~~~~~~
 
@@ -29,7 +35,7 @@ vim.api.nvim_create_user_command("Repo", function()
       return
     end
 
-    url = url:gsub("^git@([^:]+):(.+)$", "https://%1/%2")
+    url = url:gsub("^git@([^:]+):(.+)$", "https://%1/%2"):gsub("%.git$", "")
 
     local open_cmd = vim.fn.has("win32") == 1 and "start" or "xdg-open"
     os.execute(open_cmd .. " " .. url)
