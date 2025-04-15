@@ -14,12 +14,13 @@ vim.keymap.set("n", "<leader>yf", ":let @+ = expand('%:p')<CR>", { desc = "Yank 
 vim.g.autoformat = false
 vim.opt.clipboard = "unnamedplus"
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  callback = function()
-    vim.diagnostic.setloclist({ open = false })
-    vim.lsp.buf.format({ async = true })
-  end,
-})
+vim.api.nvim_create_user_command("Fmt", function()
+  vim.diagnostic.setloclist({ open = false })
+  vim.lsp.buf.format({ async = true })
+end, { desc = "Format file" })
+
+
+vim.api.nvim_set_keymap('n', '<leader>fa', ':Fmt<CR>', { noremap = true, silent = true })
 
 -- ~~~~~~~~~~~~~~~~ Git ~~~~~~~~~~~~~~~~~~~~
 
